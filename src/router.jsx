@@ -5,8 +5,13 @@ import Error404 from "./views/Error404";
 import GuestLayout from "./components/GuestLayout";
 import AccountLayout from "./components/AccountLayout";
 import Dashboard from "./views/Dashboard";
+import Cart from "./views/Cart";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Cart />,
+  },
   {
     path: "/",
     element: <GuestLayout />,
