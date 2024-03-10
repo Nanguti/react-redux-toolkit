@@ -1,8 +1,14 @@
-import { Fragment, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
 import CartItem from "../components/CartItem";
+import { useSelector, useDispatch } from "react-redux";
+import { clearCart } from "../features/cart/cartSlice";
+import { openModal } from "../features/modal/modalSlice";
 
 const Cart = () => {
+  const { cartItems, quantity, total } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
+  if (quantity < 1) {
+    return <>Cart id Empty</>;
+  }
   return (
     <div className="bg-gray-100 h-screen py-8">
       <div className="container mx-auto px-4">
@@ -21,9 +27,17 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <CartItem />
+                  {cartItems.map((item) => {
+                    return <CartItem key={item.id} {...item} />;
+                  })}
                 </tbody>
               </table>
+              <button
+                onClick={() => dispatch(openModal())}
+                className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-1/2 mx-auto block"
+              >
+                Clear the Cart
+              </button>
             </div>
           </div>
           <div className="md:w-1/4">
@@ -31,7 +45,7 @@ const Cart = () => {
               <h2 className="text-lg font-semibold mb-4">Summary</h2>
               <div className="flex justify-between mb-2">
                 <span>Subtotal</span>
-                <span>Ksh. 19.99</span>
+                <span>Ksh. {total.toFixed(2)}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Taxes</span>

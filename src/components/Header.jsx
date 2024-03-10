@@ -1,6 +1,13 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+
+import {
+  Bars3Icon,
+  XMarkIcon,
+  ShoppingCartIcon,
+} from "@heroicons/react/24/outline";
+import { useSelector, useDispatch } from "react-redux";
+import { calculateTotals } from "../features/cart/cartSlice";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -14,6 +21,11 @@ function classNames(...classes) {
 }
 
 const Header = () => {
+  const { cartItems, quantity } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(calculateTotals());
+  }, [cartItems]);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -65,9 +77,10 @@ const Header = () => {
                   type="button"
                   className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
+                  <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-1 text-xs">
+                    {quantity}
+                  </span>
                 </button>
 
                 {/* Profile dropdown */}
