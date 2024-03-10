@@ -10,10 +10,6 @@ import Cart from "./views/Cart";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Cart />,
-  },
-  {
-    path: "/",
     element: <GuestLayout />,
     children: [
       {
@@ -23,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

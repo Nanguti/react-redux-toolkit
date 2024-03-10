@@ -14,7 +14,7 @@ const CartItem = () => {
             <span className="font-semibold">Product name</span>
           </div>
         </td>
-        <td className="py-4">$19.99</td>
+        <td className="py-4">Ksh. 19.99</td>
         <td className="py-4">
           <div className="flex items-center">
             <button className="border rounded-md py-2 px-4 mr-2">-</button>
@@ -22,7 +22,7 @@ const CartItem = () => {
             <button className="border rounded-md py-2 px-4 ml-2">+</button>
           </div>
         </td>
-        <td className="py-4">$19.99</td>
+        <td className="py-4">Ksh. 19.99</td>
         <td>
           <XMarkIcon className="h-6 w-6" aria-hidden="true" />
         </td>
